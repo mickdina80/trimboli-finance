@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | Trimboli Finance</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0f2340;
+  --navy-light: #1a3358;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --cream: #faf7f2;
+  --white: #ffffff;
+  --gray: #f4f1ec;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --border: #e5ddd0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); padding: 0 5%;
+  height: 84px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-logo-img { height: 64px; width: auto; max-width: 220px; display: block; object-fit: contain; }
+.nav-back { font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.nav-back:hover { color: var(--gold); }
+
+/* HERO BANNER */
+.page-banner {
+  background: var(--navy); padding: 140px 5% 64px; position: relative; overflow: hidden;
+}
+.page-banner::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(201,168,76,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.page-banner-label { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; position: relative; z-index: 1; }
+.page-banner h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--white); line-height: 1.2; position: relative; z-index: 1; }
+.page-banner-sub { font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 12px; position: relative; z-index: 1; }
+
+/* CONTENT */
+.page-content { max-width: 860px; margin: 0 auto; padding: 72px 5% 96px; }
+.page-content h2 {
+  font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 600;
+  color: var(--navy); margin: 48px 0 16px; padding-bottom: 10px;
+  border-bottom: 2px solid var(--gold); display: inline-block;
+}
+.page-content h2:first-child { margin-top: 0; }
+.page-content h3 {
+  font-size: 1rem; font-weight: 600; color: var(--navy); margin: 24px 0 10px;
+}
+.page-content p {
+  font-size: 15px; line-height: 1.8; color: #444; margin-bottom: 16px; font-weight: 300;
+}
+.page-content ul {
+  margin: 12px 0 20px 0; padding: 0; list-style: none;
+}
+.page-content ul li {
+  font-size: 15px; line-height: 1.8; color: #444; font-weight: 300;
+  padding: 4px 0 4px 20px; position: relative;
+}
+.page-content ul li::before {
+  content: ''; position: absolute; left: 0; top: 13px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+}
+.contact-box {
+  background: var(--cream); border: 1px solid var(--border); border-radius: 12px;
+  padding: 28px 32px; margin-top: 16px;
+}
+.contact-box p { margin: 0; font-size: 15px; line-height: 2; color: var(--text); font-weight: 400; }
+.contact-box a { color: var(--navy); font-weight: 600; text-decoration: none; }
+.contact-box a:hover { color: var(--gold); }
+.afca-box {
+  background: var(--navy); border-radius: 12px; padding: 28px 32px; margin-top: 16px;
+}
+.afca-box p { color: rgba(255,255,255,0.8); font-size: 14px; line-height: 2; margin: 0; font-weight: 300; }
+.afca-box a { color: var(--gold); font-weight: 600; text-decoration: none; }
+.commission-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px; margin: 16px 0 24px;
+}
+.commission-card {
+  background: var(--cream); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px 24px;
+}
+.commission-card h4 { font-size: 13px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+.commission-card p { font-size: 14px; color: var(--muted); margin: 0; line-height: 1.6; font-weight: 400; }
+
+/* FOOTER */
+footer {
+  background: #08162a; color: rgba(255,255,255,0.55);
+  padding: 32px 5%; text-align: center; font-size: 13px;
+}
+footer a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="Trimboli Finance" class="nav-logo-img">
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to home
+  </a>
+</nav>
+
+<div class="page-banner">
+  <span class="page-banner-label">Legal</span>
+  <h1>Privacy Policy</h1>
+  <p class="page-banner-sub">Effective Date: 2 March 2026</p>
+</div>
+
+<div class="page-content">
+
+<p>Trimboli Finance ("Trimboli Finance", "we", "us", "our") respects your privacy and is committed to protecting your personal information in accordance with the Privacy Act 1988 (Cth) and the Australian Privacy Principles (APPs).</p>
+<p>This Privacy Policy explains how we collect, use, disclose and protect your personal information.</p>
+
+<h2>1. What Personal Information We Collect</h2>
+<p>We may collect personal information including:</p>
+<ul>
+  <li>Full name</li>
+  <li>Date of birth</li>
+  <li>Contact details (phone, email, address)</li>
+  <li>Employment and income details</li>
+  <li>Financial information (assets, liabilities, credit history)</li>
+  <li>Identification documents (e.g. driver licence, passport)</li>
+  <li>Tax file number (if required)</li>
+  <li>Property details</li>
+  <li>Information about your loan requirements</li>
+  <li>Website usage data (IP address, browser type, cookies)</li>
+</ul>
+<p>We only collect information necessary to provide mortgage broking and related financial services.</p>
+
+<h2>2. How We Collect Your Information</h2>
+<p>We may collect your personal information:</p>
+<ul>
+  <li>Directly from you (via forms, email, phone, meetings)</li>
+  <li>Through our website contact forms</li>
+  <li>Through online fact-find or loan applications</li>
+  <li>From credit reporting bodies (with your consent)</li>
+  <li>From lenders, aggregators, or professional advisers</li>
+  <li>Through cookies and analytics tools</li>
+</ul>
+
+<h2>3. Why We Collect Your Information</h2>
+<p>We collect and use your personal information to:</p>
+<ul>
+  <li>Assess your borrowing capacity</li>
+  <li>Recommend suitable loan products</li>
+  <li>Prepare and submit loan applications</li>
+  <li>Communicate with lenders and third parties</li>
+  <li>Provide ongoing support and loan reviews</li>
+  <li>Comply with legal and regulatory obligations</li>
+  <li>Improve our website and services</li>
+</ul>
+<p>We will not use your personal information for purposes unrelated to our services without your consent.</p>
+
+<h2>4. Disclosure of Personal Information</h2>
+<p>We may disclose your personal information to:</p>
+<ul>
+  <li>Lenders and financial institutions</li>
+  <li>Mortgage aggregators</li>
+  <li>Credit reporting bodies</li>
+  <li>Insurers</li>
+  <li>Solicitors and conveyancers</li>
+  <li>Accountants or financial advisers (with your consent)</li>
+  <li>Government authorities where required by law</li>
+  <li>IT service providers and secure cloud storage providers</li>
+</ul>
+<p>We take reasonable steps to ensure third parties protect your information.</p>
+
+<h2>5. Credit Reporting</h2>
+<p>Where required, we may collect and disclose information to credit reporting bodies. You have the right to:</p>
+<ul>
+  <li>Access your credit information</li>
+  <li>Request correction of inaccurate information</li>
+  <li>Make a complaint to a credit reporting body</li>
+</ul>
+<p>Details of relevant credit reporting bodies can be provided upon request.</p>
+
+<h2>6. Website and Cookies</h2>
+<p>Our website may use cookies and analytics tools (e.g. Google Analytics) to:</p>
+<ul>
+  <li>Understand website traffic</li>
+  <li>Improve user experience</li>
+  <li>Measure marketing performance</li>
+</ul>
+<p>You can disable cookies in your browser settings.</p>
+
+<h2>7. Data Security</h2>
+<p>We take reasonable steps to protect your personal information from:</p>
+<ul>
+  <li>Misuse</li>
+  <li>Loss</li>
+  <li>Unauthorised access</li>
+  <li>Modification or disclosure</li>
+</ul>
+<p>This includes secure systems, encrypted communications and restricted access.</p>
+
+<h2>8. Access and Correction</h2>
+<p>You may request access to the personal information we hold about you. If your information is inaccurate or outdated, you may request correction. To do so, contact us using the details below.</p>
+
+<h2>9. Overseas Disclosure</h2>
+<p>In some cases, your personal information may be stored using secure cloud services located overseas. Where this occurs, we ensure appropriate safeguards are in place.</p>
+
+<h2>10. Complaints</h2>
+<p>If you believe your privacy has been breached, please contact us. We will investigate and respond within a reasonable timeframe.</p>
+
+<h2>11. Contact Us</h2>
+<div class="contact-box">
+  <p><strong>Trimboli Finance</strong><br>
+  Phone: <a href="tel:0432068076">0432 068 076</a><br>
+  Email: <a href="mailto:rocky@trimbolifinance.com.au">rocky@trimbolifinance.com.au</a></p>
+</div>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 Trimboli Finance. All rights reserved. &nbsp;|&nbsp; <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-of-use.html">Terms of Use</a> &nbsp;|&nbsp; <a href="credit-guide.html">Credit Guide</a></p>
+</footer>
+
+</body>
+</html>

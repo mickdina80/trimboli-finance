@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trimboli Finance | Mortgage broker</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0f2340;
+  --navy-light: #1a3358;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --cream: #faf7f2;
+  --white: #ffffff;
+  --gray: #f4f1ec;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --border: #e5ddd0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); padding: 0 5%;
+  height: 84px; display: flex; align-items: center; justify-content: space-between;
+  transition: box-shadow 0.3s;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-img { height: 64px; width: auto; max-width: 220px; display: block; object-fit: contain; }
+.footer-logo-img { height: 64px; width: auto; max-width: 220px; display: block; object-fit: contain; }
+.nav-logo-icon { width: 40px; height: 40px; background: var(--navy); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.nav-logo-icon span { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; }
+.nav-logo-name { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--navy); font-weight: 600; display: block; }
+.nav-logo-sub { font-size: 11px; color: var(--muted); font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px; display: block; }
+.nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+.nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--text); transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.25s; transform-origin: left; }
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.btn-nav { background: var(--navy); color: var(--white); padding: 10px 22px; border-radius: 6px; font-weight: 500; font-size: 14px; font-family: 'DM Sans', sans-serif; border: none; cursor: pointer; transition: background 0.2s; }
+.btn-nav:hover { background: var(--gold); color: var(--navy); }
+.nav-phone { font-size: 15px; font-weight: 700; color: var(--navy); text-decoration: none; letter-spacing: 0.01em; transition: all 0.2s; background: var(--cream); border: 2px solid var(--navy); padding: 9px 18px; border-radius: 6px; display: inline-flex; align-items: center; }
+.nav-phone:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+/* HERO */
+.hero { min-height: 100vh; background: var(--navy); display: flex; align-items: center; position: relative; overflow: hidden; padding: 120px 5% 80px; gap: 48px; }
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 75% 50%, rgba(201,168,76,0.12) 0%, transparent 70%), radial-gradient(ellipse 40% 80% at 10% 80%, rgba(26,51,88,0.8) 0%, transparent 60%); pointer-events: none; }
+.hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+.hero-content { position: relative; z-index: 1; max-width: 640px; animation: fadeUp 0.9s ease both; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); border-radius: 100px; padding: 6px 16px; font-size: 12px; font-weight: 500; color: var(--gold-light); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; flex-shrink: 0; }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.4); } }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5.5vw, 4.2rem); font-weight: 600; color: var(--white); line-height: 1.12; margin-bottom: 24px; }
+.hero-gold { color: var(--gold); display: block; }
+.hero-desc { font-size: 18px; line-height: 1.7; color: rgba(255,255,255,0.72); margin-bottom: 40px; max-width: 520px; font-weight: 300; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.btn-primary { background: var(--gold); color: var(--navy); padding: 16px 32px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; transition: all 0.25s; letter-spacing: 0.01em; display: inline-block; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.35); }
+.btn-outline { background: transparent; color: var(--white); padding: 16px 32px; border-radius: 8px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: all 0.25s; }
+.btn-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); }
+.hero-stats { position: relative; z-index: 1; margin-left: auto; display: flex; flex-direction: column; gap: 20px; animation: fadeUp 0.9s 0.2s ease both; flex-shrink: 0; }
+.stat-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 28px 32px; text-align: center; backdrop-filter: blur(10px); width: 200px; }
+.stat-num { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; color: var(--gold); line-height: 1; display: block; }
+.stat-label { font-size: 12px; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 8px; display: block; font-weight: 500; }
+
+/* TRUST BAR */
+.trust-bar { background: var(--cream); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 5%; display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.trust-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; color: var(--muted); }
+.trust-icon { color: var(--gold); flex-shrink: 0; }
+
+/* SECTIONS */
+section { padding: 96px 5%; }
+.section-label { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 600; color: var(--navy); line-height: 1.22; margin-bottom: 20px; }
+.section-sub { font-size: 17px; color: var(--muted); line-height: 1.7; max-width: 560px; font-weight: 300; }
+
+/* SERVICES */
+.services { background: var(--white); }
+.services-hd { text-align: center; margin-bottom: 64px; }
+.services-hd .section-sub { margin: 0 auto; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; max-width: 1200px; margin: 0 auto; }
+.service-card { background: var(--cream); border: 1px solid var(--border); border-radius: 16px; padding: 40px 36px; transition: all 0.3s; position: relative; overflow: hidden; }
+.service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+.service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(15,35,64,0.1); background: var(--white); }
+.service-card:hover::after { transform: scaleX(1); }
+.service-icon { width: 52px; height: 52px; background: var(--navy); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 22px; }
+.service-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: var(--navy); margin-bottom: 14px; }
+.service-card p { font-size: 15px; color: var(--muted); line-height: 1.7; font-weight: 300; }
+.service-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: 14px; font-weight: 600; color: var(--gold); cursor: pointer; border: none; background: none; font-family: 'DM Sans', sans-serif; padding: 0; }
+
+/* LENDERS */
+.lenders { background: var(--gray); padding: 48px 5%; text-align: center; }
+.lenders-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; }
+.lender-logos { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.lender-logo { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 14px 28px; font-size: 14px; font-weight: 700; color: var(--muted); opacity: 0.75; transition: opacity 0.2s; }
+.lender-logo:hover { opacity: 1; color: var(--navy); }
+.lender-logos-img { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+/* HOW IT WORKS */
+.how-it-works { background: var(--navy); }
+.how-it-works .section-title { color: var(--white); }
+.steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 64px; max-width: 1100px; }
+.step { padding: 48px 36px; border-right: 1px solid rgba(255,255,255,0.1); }
+.step:last-child { border-right: none; }
+.step-num { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 700; color: rgba(201,168,76,0.15); line-height: 1; display: block; margin-bottom: 8px; }
+.step h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--white); margin-bottom: 16px; font-weight: 600; }
+.step p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.75; font-weight: 300; }
+
+/* ABOUT */
+.about { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-img-wrap { position: relative; border-radius: 20px; overflow: hidden; }
+.about-img-wrap img { width: 100%; display: block; border-radius: 20px; }
+.about-badge { position: absolute; bottom: 32px; left: 32px; background: var(--gold); border-radius: 12px; padding: 16px 24px; display: flex; align-items: center; gap: 12px; }
+.badge-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--navy); line-height: 1; }
+.badge-text { font-size: 13px; font-weight: 600; color: var(--navy); line-height: 1.3; }
+.about-content { padding: 48px 0; }
+.about-features { display: flex; flex-direction: column; gap: 20px; margin-top: 36px; }
+.about-feature { display: flex; gap: 16px; align-items: flex-start; }
+.feat-icon { width: 40px; height: 40px; background: var(--navy); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.about-feature h4 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.about-feature p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* TESTIMONIALS */
+.testimonials { background: var(--white); }
+.testi-hd { margin-bottom: 56px; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+.testi-card { background: var(--cream); border: 1px solid var(--border); border-radius: 16px; padding: 36px 32px; }
+.stars { display: flex; gap: 4px; margin-bottom: 20px; }
+.star { color: var(--gold); font-size: 16px; }
+.testi-card blockquote { font-size: 15px; line-height: 1.75; color: var(--text); font-style: italic; margin-bottom: 24px; font-weight: 300; }
+.testi-author { display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--border); padding-top: 20px; }
+.author-av { width: 44px; height: 44px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--gold); flex-shrink: 0; }
+.author-name { display: block; font-size: 14px; font-weight: 600; color: var(--navy); }
+.author-loc { font-size: 12px; color: var(--muted); }
+
+/* CONTACT */
+.contact-cta { background: linear-gradient(135deg, var(--navy) 0%, #162d50 100%); position: relative; overflow: hidden; }
+.contact-cta::before { content: ''; position: absolute; top: -40%; right: -10%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.1), transparent 60%); pointer-events: none; }
+.cta-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; }
+.cta-content .section-title { color: var(--white); }
+.cta-content .section-sub { color: rgba(255,255,255,0.6); }
+.contact-details { margin-top: 36px; display: flex; flex-direction: column; gap: 16px; }
+.contact-detail { display: flex; align-items: center; gap: 14px; color: rgba(255,255,255,0.75); font-size: 15px; text-decoration: none; }
+.enq-form { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 40px; backdrop-filter: blur(12px); }
+.enq-form h3 { font-family: 'Playfair Display', serif; color: var(--white); margin-bottom: 24px; font-size: 1.4rem; font-weight: 600; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px; padding: 13px 16px; font-size: 15px; color: var(--white);
+  font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; -webkit-appearance: none;
+}
+.form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+.form-group select option { background: #0f2340; color: #fff; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.btn-submit { width: 100%; background: var(--gold); color: var(--navy); border: none; padding: 16px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.25s; margin-top: 8px; }
+.btn-submit:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+.form-note { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 14px; line-height: 1.5; }
+
+/* FOOTER */
+footer { background: #08162a; color: rgba(255,255,255,0.55); padding: 64px 5% 32px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; max-width: 1200px; }
+.footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.45); max-width: 280px; font-weight: 300; margin-top: 16px; }
+.footer-col h4 { font-size: 13px; font-weight: 600; color: var(--white); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul a { font-size: 14px; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 32px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; max-width: 1200px; flex-wrap: wrap; gap: 12px; }
+.footer-disc { max-width: 1200px; margin-top: 24px; font-size: 11px; line-height: 1.6; color: rgba(255,255,255,0.18); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 24px; }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* MODAL */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(8,22,42,0.8); backdrop-filter: blur(6px); z-index: 9999; align-items: center; justify-content: center; padding: 16px; }
+.modal-overlay.open { display: flex; }
+.modal-box { background: var(--white); border-radius: 20px; width: 100%; max-width: 500px; max-height: 92vh; overflow-y: auto; box-shadow: 0 32px 80px rgba(0,0,0,0.4); animation: modalIn 0.3s ease both; }
+@keyframes modalIn { from { opacity: 0; transform: scale(0.94) translateY(16px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+.modal-head { background: var(--navy); border-radius: 20px 20px 0 0; padding: 32px 36px 28px; position: relative; }
+.modal-head h2 { font-family: 'Playfair Display', serif; font-size: 1.55rem; color: var(--white); font-weight: 600; margin-bottom: 6px; }
+.modal-head p { font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 300; }
+.modal-x { position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); border: none; cursor: pointer; color: var(--white); font-size: 20px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; font-family: sans-serif; line-height: 1; }
+.modal-x:hover { background: rgba(255,255,255,0.2); }
+.modal-body { padding: 32px 36px 36px; }
+.modal-body .form-group label { color: var(--text); font-weight: 600; font-size: 13px; }
+.modal-body .form-group input,
+.modal-body .form-group select,
+.modal-body .form-group textarea { background: var(--cream); border: 1.5px solid var(--border); color: var(--text); }
+.modal-body .form-group input::placeholder,
+.modal-body .form-group textarea::placeholder { color: #bbb; }
+.modal-body .form-group input:focus,
+.modal-body .form-group select:focus,
+.modal-body .form-group textarea:focus { border-color: var(--gold); background: var(--white); }
+.modal-body .form-group select option { background: var(--white); color: var(--text); }
+.modal-submit { width: 100%; background: var(--gold); color: var(--navy); border: none; padding: 16px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.25s; margin-top: 8px; }
+.modal-submit:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.35); }
+.modal-success { text-align: center; padding: 52px 36px; }
+.modal-success h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--navy); margin-bottom: 12px; }
+.modal-success p { color: var(--muted); font-size: 15px; line-height: 1.7; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+  .step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .step:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.1); }
+  .step:last-child, .step:nth-last-child(2) { border-bottom: none; }
+}
+@media (max-width: 900px) {
+  .hero { flex-direction: column; text-align: center; }
+  .hero-content { max-width: 100%; }
+  .hero-stats { flex-direction: row; margin: 40px auto 0; flex-wrap: wrap; justify-content: center; }
+  .about { grid-template-columns: 1fr; gap: 40px; }
+  .cta-inner { grid-template-columns: 1fr; gap: 40px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .testi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .nav-links li:not(:last-child) { display: none; }
+  .hero-stats { flex-direction: column; align-items: center; }
+  .stat-card { width: 100%; max-width: 240px; }
+  .hero-actions { justify-content: center; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .hero-actions .btn-primary, .hero-actions .btn-outline { width: 100%; max-width: 320px; text-align: center; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .step { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 36px 20px; }
+  .step:last-child { border-bottom: none; }
+  .modal-head { padding: 28px 24px 24px; }
+  .modal-body { padding: 24px 24px 28px; }
+  .modal-body .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- CALLBACK MODAL -->
+<div class="modal-overlay" id="cbModal" role="dialog" aria-modal="true" aria-labelledby="cbTitle">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2 id="cbTitle">Request a callback</h2>
+      <p>Leave your details and Rocky will be in touch shortly.</p>
+      <button class="modal-x" id="cbClose" aria-label="Close modal">&times;</button>
+    </div>
+    <div class="modal-body" id="cbBody">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cbFirst">First name</label>
+          <input type="text" id="cbFirst" placeholder="John">
+        </div>
+        <div class="form-group">
+          <label for="cbLast">Last name</label>
+          <input type="text" id="cbLast" placeholder="Smith">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cbPhone">Phone number</label>
+        <input type="tel" id="cbPhone" placeholder="0400 000 000">
+      </div>
+      <div class="form-group">
+        <label for="cbEmail">Email address</label>
+        <input type="email" id="cbEmail" placeholder="john@example.com">
+      </div>
+      <div class="form-group">
+        <label for="cbTime">Best time to call</label>
+        <select id="cbTime">
+          <option value="">Select a time</option>
+          <option value="Morning (8am - 12pm)">Morning (8am - 12pm)</option>
+          <option value="Afternoon (12pm - 5pm)">Afternoon (12pm - 5pm)</option>
+          <option value="Evening (5pm - 7pm)">Evening (5pm - 7pm)</option>
+          <option value="Anytime">Anytime</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cbService">What are you looking for?</label>
+        <select id="cbService">
+          <option value="">Select a service</option>
+          <option value="First home purchase">First home purchase</option>
+          <option value="Refinancing">Refinancing</option>
+          <option value="Investment property">Investment property</option>
+          <option value="Construction loan">Construction loan</option>
+          <option value="Commercial finance">Commercial finance</option>
+          <option value="Self-employed lending">Self-employed lending</option>
+          <option value="Not sure yet">Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cbNotes">Anything else? <span style="font-weight:300;opacity:0.6">(optional)</span></label>
+        <textarea rows="3" id="cbNotes" placeholder="Brief notes for Rocky..." style="resize:vertical"></textarea>
+      </div>
+      <button class="modal-submit" id="cbSubmit">Request my callback</button>
+      <p style="font-size:12px;color:var(--muted);margin-top:14px;line-height:1.5;text-align:center">Rocky typically calls back within a few hours during business hours.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <img src="logo.png" alt="Trimboli Finance" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="tel:0432068076" class="nav-phone"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:6px;margin-top:-2px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.92z"/></svg>0432 068 076</a></li>
+    <li><button class="btn-nav open-modal">Request a callback</button></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Trusted mortgage broker &middot; Melbourne
+    </div>
+    <h1>Your home loan,<span class="hero-gold">sorted with confidence.</span></h1>
+    <p class="hero-desc">Hundreds of loans compared across Australia&#39;s leading lenders to find the right fit for your situation &#8212; whether you&#39;re buying, refinancing, or investing.</p>
+    <div class="hero-actions">
+      <button class="btn-primary open-modal">Request a callback</button>
+      <a href="#services" class="btn-outline">Our services &rarr;</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card"><span class="stat-num">30+</span><span class="stat-label">Lenders on panel</span></div>
+    <div class="stat-card"><span class="stat-num">300+</span><span class="stat-label">Clients helped</span></div>
+    <div class="stat-card"><span class="stat-num">15yr</span><span class="stat-label">Industry experience</span></div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <svg class="trust-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    MFAA accredited member
+  </div>
+  <div class="trust-item">
+    <svg class="trust-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    Same-day responses
+  </div>
+  <div class="trust-item">
+    <svg class="trust-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    No upfront costs
+  </div>
+  <div class="trust-item">
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-hd fade-up">
+    <span class="section-label">Finance solutions</span>
+    <h2 class="section-title">Finance solutions<br>for every stage of life</h2>
+    <p class="section-sub">From your first home to your investment portfolio, lending strategies tailored to your goals &#8212; not just today, but long-term.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="service-icon">&#127969;</div>
+      <h3>First home buyers</h3>
+      <p>Navigating your first purchase can feel overwhelming. The process is simplified, every option explained, and access to government grants and schemes you may qualify for.</p>
+      <button class="service-link open-modal">Get started &rarr;</button>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">&#128260;</div>
+      <h3>Refinancing</h3>
+      <p>Your life changes &#8212; your home loan should too. Your current rate and structure is reviewed to find a better deal, with the switch handled with minimal hassle.</p>
+      <button class="service-link open-modal">Get started &rarr;</button>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">&#128200;</div>
+      <h3>Investment property</h3>
+      <p>Build long-term wealth through property. Investment lending structured to maximise borrowing power and optimise your tax position alongside your accountant.</p>
+      <button class="service-link open-modal">Get started &rarr;</button>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">&#127959;</div>
+      <h3>Construction loans</h3>
+      <p>Building or renovating? Construction lending works differently. The drawdown process is managed to ensure your finance aligns with your builder&#39;s schedule.</p>
+      <button class="service-link open-modal">Get started &rarr;</button>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">&#127970;</div>
+      <h3>Commercial finance</h3>
+      <p>Office, retail, industrial or development &#8212; commercial lending solutions structured for business owners and self-employed professionals.</p>
+      <button class="service-link open-modal">Get started &rarr;</button>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">&#128188;</div>
+      <h3>Self-employed lending</h3>
+      <p>Don&#39;t let complex tax returns hold you back. Lenders who understand business owners and can use your actual cash flow to assess serviceability.</p>
+      <button class="service-link open-modal">Get started &rarr;</button>
+    </div>
+  </div>
+</section>
+
+<!-- LENDERS -->
+<div class="lenders fade-up" id="lenders">
+  <p class="lenders-label">Lenders on our panel include</p>
+  <div class="lender-logos-img">
+    <img src="bank-logos.png" alt="Lenders including Westpac, Bank of Melbourne, Commonwealth Bank, ANZ, NAB, Suncorp, Bankwest, St George, ING, Liberty, Bendigo Bank, Pepper Money, Macquarie, HSBC, Resimac, AMP, AFG, RedZed, BOQ" style="max-width:100%;height:auto;display:block;margin:0 auto;">
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how-it-works">
+  <div class="fade-up">
+    <span class="section-label" style="color:var(--gold-light)">The process</span>
+    <h2 class="section-title">Simple steps to<br>your new loan</h2>
+  </div>
+  <div class="steps-grid fade-up">
+    <div class="step">
+      <span class="step-num">01</span>
+      <h3>Discovery call</h3>
+      <p>A free 30-minute consultation to understand your goals, income, and current financial position &#8212; no pressure, no obligation.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">02</span>
+      <h3>Research and strategy</h3>
+      <p>Products compared across a full lender panel with a tailored shortlist and clear recommendations presented to you.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">03</span>
+      <h3>Application and approval</h3>
+      <p>Your application is prepared and lodged, lender communications managed, and you&#39;re kept informed every step of the way.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">04</span>
+      <h3>Settlement and beyond</h3>
+      <p>Support continues long after settlement &#8212; your loan monitored, better rates flagged, and future property moves supported.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img-wrap fade-up">
+    <img src="rocky-caricature.png" alt="Rocky Trimboli, mortgage broker at Trimboli Finance">
+    <div class="about-badge">
+      <span class="badge-num">15+</span>
+      <span class="badge-text">Years<br>experience</span>
+    </div>
+  </div>
+  <div class="about-content fade-up">
+    <h2 class="section-title">Your interests first &#8212; always.</h2>
+    <p class="section-sub">Trimboli Finance was built on the belief that every Australian deserves honest, expert mortgage advice without jargon or hidden agendas. A boutique brokerage that prioritises long-term relationships over quick transactions.</p>
+    <div class="about-features">
+      <div class="about-feature">
+        <div class="feat-icon">&#128269;</div>
+        <div>
+          <h4>Independent and unbiased</h4>
+          <p>Not owned by a bank. The only obligation is finding you the best outcome from a full panel of lenders.</p>
+        </div>
+      </div>
+      <div class="about-feature">
+        <div class="feat-icon">&#129309;</div>
+        <div>
+          <h4>Broker-led, not call centre</h4>
+          <p>You work directly with Rocky from start to finish &#8212; no handoffs, no confusion, no dropped balls.</p>
+        </div>
+      </div>
+      <div class="about-feature">
+        <div class="feat-icon">&#128241;</div>
+        <div>
+          <h4>Available when you need it</h4>
+          <p>Evening and weekend appointments available. Your schedule is respected, not the other way around.</p>
+        </div>
+      </div>
+    </div>
+    <button class="btn-primary open-modal" style="margin-top:36px">Meet Rocky</button>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="testi-hd fade-up">
+    <span class="section-label">Client stories</span>
+    <h2 class="section-title">What our clients say</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card fade-up">
+      <div class="stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></div>
+      <blockquote>&#8220;After months struggling to get a pre-approval due to being self-employed, Rocky got us approved in weeks and into our new home. We couldn&#39;t be happier.&#8221;</blockquote>
+      <div class="testi-author">
+        <div class="author-av">S</div>
+        <div><span class="author-name">Sarah M.</span></div>
+      </div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></div>
+      <blockquote>&#8220;Rocky was an amazing help in our home buying journey, which we didn&#39;t think was possible before speaking to him. An amazing service we plan to use for many years to come.&#8221;</blockquote>
+      <div class="testi-author">
+        <div class="author-av">T</div>
+        <div><span class="author-name">Tariq C.</span></div>
+      </div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></div>
+      <blockquote>&#8220;Rocky made buying my first home simple and stress-free, guiding me through with patience and expertise. I would strongly recommend.&#8221;</blockquote>
+      <div class="testi-author">
+        <div class="author-av">R</div>
+        <div><span class="author-name">Ruby G.</span></div>
+      </div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></div>
+      <blockquote>&#8220;From first enquiry to settlement, everything was handled professionally, patiently, and proactively. Could not recommend Rocky highly enough.&#8221;</blockquote>
+      <div class="testi-author">
+        <div class="author-av">D</div>
+        <div><span class="author-name">Daniel P.</span></div>
+      </div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></div>
+      <blockquote>&#8220;From application to settlement, everything was handled perfectly. Rocky kept us informed every step of the way and made the whole experience seamless.&#8221;</blockquote>
+      <div class="testi-author">
+        <div class="author-av">M</div>
+        <div><span class="author-name">Melissa T.</span></div>
+      </div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></div>
+      <blockquote>&#8220;Simple, friendly and helpful advice at every step of the journey. Have been a client for almost a decade and Rocky is always looking out for the best rates for us, year on year.&#8221;</blockquote>
+      <div class="testi-author">
+        <div class="author-av">M</div>
+        <div><span class="author-name">Michael D.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-cta" id="contact">
+  <div class="cta-inner">
+    <div class="cta-content fade-up">
+      <span class="section-label" style="color:var(--gold-light)">Get in touch</span>
+      <h2 class="section-title">Ready to take the<br>next step?</h2>
+      <p class="section-sub">Book a free, no-obligation consultation. Rocky will review your situation and show you what&#39;s possible.</p>
+      <div class="contact-details">
+        <a href="tel:0432068076" class="contact-detail"><span style="font-size:22px">&#128222;</span> 0432 068 076</a>
+        <span id="emailLink" class="contact-detail"><span style="font-size:22px">&#9993;</span> <span id="emailAddr">Loading...</span></span>
+        <div class="contact-detail"><span style="font-size:22px">&#128205;</span> Melbourne, VIC (in-person or online)</div>
+      </div>
+      <button class="btn-primary open-modal" style="margin-top:36px">Request a callback</button>
+    </div>
+    <div class="enq-form fade-up">
+      <h3>Send an enquiry</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="eqFirst">First name</label>
+          <input type="text" id="eqFirst" placeholder="John">
+        </div>
+        <div class="form-group">
+          <label for="eqLast">Last name</label>
+          <input type="text" id="eqLast" placeholder="Smith">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="eqEmail">Email address</label>
+        <input type="email" id="eqEmail" placeholder="john@example.com">
+      </div>
+      <div class="form-group">
+        <label for="eqPhone">Phone number</label>
+        <input type="tel" id="eqPhone" placeholder="0400 000 000">
+      </div>
+      <div class="form-group">
+        <label for="eqService">Looking for...</label>
+        <select id="eqService">
+          <option value="">Select a service</option>
+          <option value="First home purchase">First home purchase</option>
+          <option value="Refinancing">Refinancing</option>
+          <option value="Investment property">Investment property</option>
+          <option value="Construction loan">Construction loan</option>
+          <option value="Commercial finance">Commercial finance</option>
+          <option value="Self-employed lending">Self-employed lending</option>
+          <option value="Not sure yet">Not sure yet</option>
+        </select>
+      </div>
+      <button class="btn-submit" id="eqSubmit">Send enquiry &rarr;</button>
+      <p class="form-note">By submitting you agree to our privacy policy. Rocky will respond within one business day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">
+        <img src="logo.png" alt="Trimboli Finance" class="footer-logo-img">
+      </a>
+      <p>Independent mortgage broking for Australians who want expert advice, genuine care, and the best possible outcome for their situation.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">First home buyers</a></li>
+        <li><a href="#services">Refinancing</a></li>
+        <li><a href="#services">Investment loans</a></li>
+        <li><a href="#services">Construction</a></li>
+        <li><a href="#services">Commercial finance</a></li>
+        <li><a href="#services">Self-employed</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">Meet Rocky</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#lenders">Lenders</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy-policy.html">Privacy policy</a></li>
+        <li><a href="terms-of-use.html">Terms of use</a></li>
+        <li><a href="credit-guide.html">Credit guide</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Trimboli Finance. All rights reserved.</span>
+    <span>ABN: 96 849 943 641 &middot; MFAA member</span>
+  </div>
+  <div class="footer-disc">
+    Trimboli Finance is a credit representative (Credit Representative Number 478816). Your full financial situation would need to be reviewed prior to acceptance of any offer or product. This website contains general information only and does not constitute financial or mortgage advice.
+  </div>
+  <div style="max-width:1200px;margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;">
+    <p style="font-size:15px;color:rgba(255,255,255,0.7);text-align:center;letter-spacing:0.02em;font-weight:500;">
+      Website designed and built by <a href="https://www.validateinnovate.com.au" target="_blank" rel="noopener noreferrer" style="color:var(--gold);font-weight:700;text-decoration:none;border-bottom:2px solid rgba(201,168,76,0.6);padding-bottom:2px;transition:color 0.2s;">Validate and Innovate</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+
+  /* Scroll animations */
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry, i) {
+      if (entry.isIntersecting) {
+        setTimeout(function () { entry.target.classList.add('visible'); }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach(function (el) { observer.observe(el); });
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var target = document.querySelector(link.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  /* Nav shadow */
+  window.addEventListener('scroll', function () {
+    document.getElementById('mainNav').style.boxShadow =
+      window.scrollY > 20 ? '0 4px 24px rgba(0,0,0,0.08)' : 'none';
+  });
+
+  /* Modal */
+  var modal = document.getElementById('cbModal');
+  function openModal() { modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+  document.querySelectorAll('.open-modal').forEach(function (btn) {
+    btn.addEventListener('click', openModal);
+  });
+  document.getElementById('cbClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) { closeModal(); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeModal(); } });
+
+  /* Submit via FormData (free Formspree plan compatible) */
+  var ENDPOINT = 'https://formspree.io/f/mreaoqgq';
+
+  function post(fields, win, fail) {
+    var data = new FormData();
+    Object.keys(fields).forEach(function (k) { data.append(k, fields[k]); });
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: data
+    }).then(function (res) {
+      if (res.ok) {
+        win();
+      } else {
+        res.json().then(function (d) {
+          var msg = 'HTTP ' + res.status;
+          if (d && d.errors && d.errors.length) { msg = d.errors.map(function (e) { return e.message; }).join(', '); }
+          else if (d && d.error) { msg = d.error; }
+          fail(msg);
+        }).catch(function () { fail('HTTP ' + res.status); });
+      }
+    }).catch(function (err) {
+      fail('Network error - ' + (err && err.message ? err.message : 'check connection'));
+    });
+  }
+
+  /* Callback modal submit */
+  document.getElementById('cbSubmit').addEventListener('click', function () {
+    var first   = document.getElementById('cbFirst').value.trim();
+    var last    = document.getElementById('cbLast').value.trim();
+    var phone   = document.getElementById('cbPhone').value.trim();
+    var email   = document.getElementById('cbEmail').value.trim();
+    var time    = document.getElementById('cbTime').value;
+    var service = document.getElementById('cbService').value;
+    var notes   = document.getElementById('cbNotes').value.trim();
+    var btn     = document.getElementById('cbSubmit');
+
+    document.getElementById('cbFirst').style.borderColor = '';
+    document.getElementById('cbPhone').style.borderColor = '';
+    if (!first) { document.getElementById('cbFirst').style.borderColor = '#e53e3e'; }
+    if (!phone) { document.getElementById('cbPhone').style.borderColor = '#e53e3e'; }
+    if (!first || !phone) { return; }
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    post(
+      { source: 'Callback', first_name: first, last_name: last, phone: phone,
+        email: email || 'not provided', best_time: time || 'not specified',
+        service: service || 'not specified', notes: notes || 'none' },
+      function () {
+        var body = document.getElementById('cbBody');
+        var div = document.createElement('div');
+        div.className = 'modal-success';
+        div.innerHTML =
+          '<p style="font-size:56px;margin-bottom:20px">&#10003;</p>' +
+          '<h3>Thanks, ' + first + '!</h3>' +
+          '<p>Your callback request has been sent to Rocky. Expect a call within a few hours during business hours.</p>' +
+          '<p style="margin-top:20px;font-size:14px">Want to reach out now?</p>' +
+          '<a href="tel:0432068076" style="display:inline-block;margin-top:8px;color:var(--gold);font-weight:700;font-size:20px;text-decoration:none">0432 068 076</a>';
+        body.innerHTML = '';
+        body.appendChild(div);
+      },
+      function (errMsg) {
+        btn.textContent = 'Request my callback';
+        btn.disabled = false;
+        btn.style.opacity = '';
+        alert('Submission error: ' + errMsg + '\n\nCall Rocky directly on 0432 068 076.');
+      }
+    );
+  });
+
+  /* Enquiry form submit */
+  document.getElementById('eqSubmit').addEventListener('click', function () {
+    var firstName = document.getElementById('eqFirst').value.trim();
+    var lastName  = document.getElementById('eqLast').value.trim();
+    var email     = document.getElementById('eqEmail').value.trim();
+    var phone     = document.getElementById('eqPhone').value.trim();
+    var service   = document.getElementById('eqService').value;
+    var btn       = document.getElementById('eqSubmit');
+
+    document.getElementById('eqFirst').style.borderColor = '';
+    document.getElementById('eqPhone').style.borderColor = '';
+    if (!firstName) { document.getElementById('eqFirst').style.borderColor = 'rgba(229,62,62,0.7)'; }
+    if (!phone)     { document.getElementById('eqPhone').style.borderColor = 'rgba(229,62,62,0.7)'; }
+    if (!firstName || !phone) { return; }
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    post(
+      { source: 'Enquiry form', first_name: firstName, last_name: lastName,
+        email: email || 'not provided', phone: phone, service: service || 'not specified' },
+      function () {
+        btn.textContent = 'Enquiry sent!';
+        btn.style.background = '#2d6a4f';
+        btn.style.color = '#fff';
+        btn.style.opacity = '';
+        ['eqFirst','eqLast','eqEmail','eqPhone','eqService'].forEach(function (id) {
+          document.getElementById(id).value = '';
+          document.getElementById(id).style.borderColor = '';
+        });
+        setTimeout(function () {
+          btn.textContent = 'Send enquiry';
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.disabled = false;
+        }, 4000);
+      },
+      function (errMsg) {
+        btn.textContent = 'Send enquiry';
+        btn.disabled = false;
+        btn.style.opacity = '';
+        alert('Submission error: ' + errMsg + '\n\nCall Rocky on 0432 068 076.');
+      }
+    );
+  });
+
+  /* Write email address at runtime to defeat Cloudflare obfuscation */
+  var eAddr = document.getElementById('emailAddr');
+  var eLink = document.getElementById('emailLink');
+  if (eAddr && eLink) {
+    var u = 'rocky';
+    var d = 'trimbolifinance.com.au';
+    var email = u + '@' + d;
+    eAddr.textContent = email;
+    eLink.href = 'mailto:' + email;
+    eLink.style.cursor = 'pointer';
+    eLink.setAttribute('role', 'link');
+    eLink.addEventListener('click', function () {
+      window.location.href = 'mailto:' + email;
+    });
+  }
+
+}());
+</script>
+</body>
+</html>
